@@ -14,12 +14,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import com.calculator.VerticalSpacer
-import com.calculator.lowerHeatingValue.WorkingFuel
-import com.calculator.lowerHeatingValue.getMass
-import com.calculator.lowerHeatingValue.getMassFactor
-import com.calculator.lowerHeatingValue.getLowerHeatingValue
-import com.calculator.lowerHeatingValue.getAdjustedLowerHeatingValue
-import com.calculator.lowerHeatingValue.round
+import com.calculator.mainCalculations.WorkingFuel
+import com.calculator.mainCalculations.getMass
+import com.calculator.mainCalculations.getMassFactor
+import com.calculator.mainCalculations.getLowerHeatingValue
+import com.calculator.mainCalculations.getAdjustedLowerHeatingValue
+import com.calculator.mainCalculations.round
 
 
 @Composable

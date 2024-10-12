@@ -1,4 +1,4 @@
-package com.calculator.lowerHeatingValue
+package com.calculator.mainCalculations
 
 fun Double.round(): Double {
     return Math.round(this * 100) / 100.0
