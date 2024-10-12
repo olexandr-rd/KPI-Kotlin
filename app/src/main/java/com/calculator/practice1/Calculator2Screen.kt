@@ -14,10 +14,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import com.calculator.VerticalSpacer
-import com.calculator.lowerHeatingValue.CombustibleFuel
-import com.calculator.lowerHeatingValue.getMassFromDAF
-import com.calculator.lowerHeatingValue.getLowerHeatingValueFromDAF
-import com.calculator.lowerHeatingValue.round
+import com.calculator.mainCalculations.CombustibleFuel
+import com.calculator.mainCalculations.getMassFromDAF
+import com.calculator.mainCalculations.getLowerHeatingValueFromDAF
+import com.calculator.mainCalculations.round
 
 
 @Composable
@@ -31,9 +31,7 @@ fun Calculator2Screen(navController: NavController) {
     var lhvFromDAF by remember { mutableDoubleStateOf(0.0) }
 
     Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .verticalScroll(scrollState)
+        modifier = Modifier.padding(16.dp).verticalScroll(scrollState)
     ) {
         IconButton(onClick = { navController.popBackStack() }) {
             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")

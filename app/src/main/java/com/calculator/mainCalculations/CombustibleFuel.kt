@@ -1,4 +1,4 @@
-package com.calculator.lowerHeatingValue
+package com.calculator.mainCalculations
 
 data class CombustibleFuel(
     val c: Double,   // C, %
