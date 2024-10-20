@@ -14,10 +14,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import com.calculator.VerticalSpacer
-import com.calculator.mainCalculations.CombustibleFuel
-import com.calculator.mainCalculations.getMassFromDAF
-import com.calculator.mainCalculations.getLowerHeatingValueFromDAF
-import com.calculator.mainCalculations.round
 
 
 @Composable

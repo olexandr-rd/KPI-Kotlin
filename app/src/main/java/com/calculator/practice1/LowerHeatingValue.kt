@@ -1,4 +1,4 @@
-package com.calculator.mainCalculations
+package com.calculator.practice1
 
 fun Double.round(): Double {
     return Math.round(this * 100) / 100.0
