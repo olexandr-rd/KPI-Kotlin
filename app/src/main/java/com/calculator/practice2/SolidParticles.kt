@@ -1,4 +1,4 @@
-package com.calculator.mainCalculations
+package com.calculator.practice2
 
 data class SolidParticles (
     val lhv: Double,

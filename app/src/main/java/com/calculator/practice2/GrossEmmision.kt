@@ -1,5 +1,8 @@
-package com.calculator.mainCalculations
+package com.calculator.practice2
 
+import com.calculator.practice1.CombustibleFuel
+import com.calculator.practice1.getLowerHeatingValueFromDAF
+import com.calculator.practice1.round
 import kotlin.math.pow
 
 fun grossCalculations(coalSpent: Double, mazutSpent: Double): DoubleArray {

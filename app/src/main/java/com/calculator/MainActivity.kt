@@ -24,6 +24,9 @@ import com.calculator.practice1.Calculator2Screen
 // Practice 2
 import com.calculator.practice2.Practice2MainScreen
 
+// Practice 3
+import com.calculator.practice3.Practice3MainScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,9 @@ class MainActivity : ComponentActivity() {
 
                 // Practice 2 screen
                 composable("practice2") { Practice2MainScreen(navController) }
+
+                // Practice 3 screen
+                composable("practice3") { Practice3MainScreen(navController) }
             }
         }
     }
@@ -66,6 +72,11 @@ fun MainScreen(navController: NavController) {
 
         Button(onClick = { navController.navigate("practice2") }) {
             Text("Go to Practice 2")
+        }
+        VerticalSpacer()
+
+        Button(onClick = { navController.navigate("practice3") }) {
+            Text("Go to Practice 3")
         }
     }
 }

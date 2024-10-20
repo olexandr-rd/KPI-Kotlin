@@ -1,4 +1,4 @@
-package com.calculator.mainCalculations
+package com.calculator.practice1
 
 data class CombustibleFuel(
     val c: Double,   // C, %
