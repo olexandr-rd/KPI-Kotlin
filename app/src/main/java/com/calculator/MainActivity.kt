@@ -21,10 +21,11 @@ import com.calculator.practice1.Practice1MainScreen
 import com.calculator.practice1.Calculator1Screen
 import com.calculator.practice1.Calculator2Screen
 
-// Practice 2-4
+// Practice 2-5
 import com.calculator.practice2.Practice2MainScreen
 import com.calculator.practice3.Practice3MainScreen
 import com.calculator.practice4.Practice4MainScreen
+import com.calculator.practice5.Practice5MainScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -41,10 +42,11 @@ class MainActivity : ComponentActivity() {
                 composable("calculator1") { Calculator1Screen(navController) }
                 composable("calculator2") { Calculator2Screen(navController) }
 
-                // Practice 2-4 screens
+                // Practice 2-5 screens
                 composable("practice2") { Practice2MainScreen(navController) }
                 composable("practice3") { Practice3MainScreen(navController) }
                 composable("practice4") { Practice4MainScreen(navController) }
+                composable("practice5") { Practice5MainScreen(navController) }
             }
         }
     }
@@ -80,6 +82,11 @@ fun MainScreen(navController: NavController) {
 
         Button(onClick = { navController.navigate("practice4") }) {
             Text("Go to Practice 4")
+        }
+        VerticalSpacer()
+
+        Button(onClick = { navController.navigate("practice5") }) {
+            Text("Go to Practice 5")
         }
     }
 }

@@ -1,7 +1,11 @@
 package com.calculator.practice1
 
-fun Double.round(): Double {
-    return Math.round(this * 100) / 100.0
+import kotlin.math.round
+
+fun Double.round(decimals: Int = 2): Double {
+    var multiplier = 1.0
+    repeat(decimals) { multiplier *= 10 }
+    return round(this * multiplier) / multiplier
 }
 
 fun getMassFactor(wp: Double, ap: Double = 0.0): Double = 100.0 / (100.0 - wp - ap)
