@@ -5,11 +5,6 @@ import kotlin.math.*
 
 const val voltage = 0.38
 
-fun main() {
-    val loads = calculateElectricalLoad(20.0, 0.2, 1.52)
-    for (load in loads) println(load)
-}
-
 fun calculateElectricalLoad(nominalPower: Double, utilizationFactor: Double, reactivePowerFactor: Double): List<PowerLoad> {
     val electricReceivers = getElectricReceivers(nominalPower, utilizationFactor, reactivePowerFactor)
 
@@ -68,7 +63,7 @@ fun getElectricReceivers(nominalPower: Double, utilizationFactor: Double, reacti
         powerFactor = 0.9,
         loadVoltage = 0.38,
         quantity = 4.0,
-        nominalPower = nominalPower, // Номінальна потужність  ЕП ( Шліфувальний верстат): Рн, кВт
+        nominalPower = nominalPower,
         utilizationFactor = 0.15,
         reactivePowerFactor = 1.33,
     ),

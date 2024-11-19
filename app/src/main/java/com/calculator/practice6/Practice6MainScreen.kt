@@ -16,14 +16,11 @@ import com.calculator.VerticalSpacer
 
 @Composable
 fun Practice6MainScreen(navController: NavController) {
-//    var linesLength by remember { mutableStateOf("") }
-//    var connections by remember { mutableStateOf("") }
-//    var emergencyOutagesLosses by remember { mutableStateOf("") }
-//    var plannedOutagesLosses by remember { mutableStateOf("") }
-//    var failureRates by remember { mutableStateOf(listOf(0.0)) }
-//    var moreReliableSystem by remember { mutableStateOf("") }
-//    var losses by remember { mutableIntStateOf(0) }
-//    var isCalculated by remember { mutableStateOf(false) }
+    var nominalPower by remember { mutableStateOf("") }
+    var utilizationFactor by remember { mutableStateOf("") }
+    var reactivePowerFactor by remember { mutableStateOf("") }
+    var powerLoads by remember { mutableStateOf<List<PowerLoad>>(emptyList()) }
+    var isCalculated by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -33,84 +30,72 @@ fun Practice6MainScreen(navController: NavController) {
     ) {
         PracticeHeader("ТВ-13 Руденко О.С. ПР 6", navController)
 
-//        TextField(
-//            value = linesLength,
-//            onValueChange = { linesLength = it },
-//            label = { Text("Length of power transmission lines (km)") },
-//            keyboardOptions = KeyboardOptions.Default.copy(
-//                keyboardType = KeyboardType.Number,
-//                imeAction = ImeAction.Next
-//            )
-//        )
-//        VerticalSpacer()
-//
-//        TextField(
-//            value = connections,
-//            onValueChange = { connections = it },
-//            label = { Text("Number of connections") },
-//            keyboardOptions = KeyboardOptions.Default.copy(
-//                keyboardType = KeyboardType.Number,
-//                imeAction = ImeAction.Next
-//            )
-//        )
-//        VerticalSpacer()
-//
-//        TextField(
-//            value = emergencyOutagesLosses,
-//            onValueChange = { emergencyOutagesLosses = it },
-//            label = { Text("Emergency outages specific losses (UAH/kW·h)") },
-//            keyboardOptions = KeyboardOptions.Default.copy(
-//                keyboardType = KeyboardType.Number,
-//                imeAction = ImeAction.Next
-//            )
-//        )
-//        VerticalSpacer()
-//
-//        TextField(
-//            value = plannedOutagesLosses,
-//            onValueChange = { plannedOutagesLosses = it },
-//            label = { Text("Planned outages specific losses (UAH/kW·h)") },
-//            keyboardOptions = KeyboardOptions.Default.copy(
-//                keyboardType = KeyboardType.Number,
-//                imeAction = ImeAction.Next
-//            )
-//        )
-//        VerticalSpacer()
-//
-//        Button(onClick = {
-//            failureRates = calculateFailureRates(
-//                linesLength.toDoubleOrNull() ?: 0.0,
-//                connections.toDoubleOrNull() ?: 0.0
-//            )
-//            moreReliableSystem = checkMoreReliableSystem(failureRates)
-//            losses = getLosses(
-//                emergencyOutagesLosses.toDoubleOrNull() ?: 0.0,
-//                plannedOutagesLosses.toDoubleOrNull() ?: 0.0
-//            )
-//
-//            isCalculated = true
-//        }) {
-//            Text("Calculate")
-//        }
-//        VerticalSpacer()
-//
-//        if(isCalculated) {
-//            Text(
-//                "Systems reliability",
-//                style = MaterialTheme.typography.titleMedium
-//            )
-//            Text("Failure rate of a single-circuit system: ${failureRates[0]} year⁻¹")
-//            VerticalSpacer()
-//            Text("Failure rate of a double-circuit system (with breaker): ${failureRates[1]} year⁻¹")
-//            VerticalSpacer()
-//            Text("System that is more reliable: $moreReliableSystem")
-//            VerticalSpacer()
-//
-//            Text(
-//                "Losses estimation due to power supply interruptions",
-//                style = MaterialTheme.typography.titleMedium
-//            )
-//            Text("Losses: $losses UAH")
-//        }
+        TextField(
+            value = nominalPower,
+            onValueChange = { nominalPower = it },
+            label = { Text("Rated Power of the Electric Motor (Grinding Machine) Pₙ, kW") },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            )
+        )
+        VerticalSpacer()
+
+        TextField(
+            value = utilizationFactor,
+            onValueChange = { utilizationFactor = it },
+            label = { Text("Utilization Factor (Polishing Machine) Kᵤ") },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            )
+        )
+        VerticalSpacer()
+
+        TextField(
+            value = reactivePowerFactor,
+            onValueChange = { reactivePowerFactor = it },
+            label = { Text("Reactive Power Factor (Circular Saw) tgφ") },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            )
+        )
+        VerticalSpacer()
+
+        Button(onClick = {
+            powerLoads = calculateElectricalLoad(
+                nominalPower.toDoubleOrNull() ?: 0.0,
+                utilizationFactor.toDoubleOrNull() ?: 0.0,
+                reactivePowerFactor.toDoubleOrNull() ?: 0.0
+            )
+
+            isCalculated = true
+        }) {
+            Text("Calculate")
+        }
+        VerticalSpacer()
+
+        if(isCalculated) {
+            Text(
+                "For the given composition of electric motors (EM) and their characteristics" +
+                    " in the workshop network, the power load will be as follows:",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text("Group utilization factor for SR1=SR2=SR3: ${powerLoads[0].utilizationFactor}")
+            Text("Effective number of EMs for SR1=SR2=SR3: ${powerLoads[0].effectiveDeviceCount}")
+            Text("Calculated active power factor for SR1=SR2=SR3: ${powerLoads[0].activePowerCoefficient}")
+            Text("Calculated active load for SR1=SR2=SR3: ${powerLoads[0].activeLoad} kW")
+            Text("Calculated reactive load for SR1=SR2=SR3: ${powerLoads[0].reactiveLoad} kvar")
+            Text("Total power for SR1=SR2=SR3: ${powerLoads[0].totalPower} kVA")
+            Text("Calculated group current for SR1=SR2=SR3: ${powerLoads[0].groupCurrent} A")
+            Text("Utilization factor for the workshop as a whole: ${powerLoads[1].utilizationFactor}")
+            Text("Effective number of EMs in the workshop as a whole: ${powerLoads[1].effectiveDeviceCount}")
+            Text("Calculated active power factor for the workshop as a whole: ${powerLoads[1].activePowerCoefficient}")
+            Text("Calculated active load on the 0.38 kV busbars of the substation: ${powerLoads[1].activeLoad}4 kW")
+            Text("Calculated reactive load on the 0.38 kV busbars of the substation: ${powerLoads[1].reactiveLoad} kvar")
+            Text("Total power on the 0.38 kV busbars of the substation: ${powerLoads[1].totalPower} kVA")
+            Text("Calculated group current on the 0.38 kV busbars of the substation: ${powerLoads[1].groupCurrent} A")
+        }
     }
 }
